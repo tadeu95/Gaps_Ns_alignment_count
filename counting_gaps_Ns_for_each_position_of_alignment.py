@@ -26,14 +26,21 @@ def save_as_df(counted,file_name):
     df['position']=range(1,len(df['counts'])+1)
     df.to_csv(file_name,sep="\t",index=False)
     
-  def plot_Ngap_counts(counted):
+def plot_Ngap_counts(counted,image_format):
     """
-    Takes in the list generated with the previous function, plots the result and saves the figure in a pdf file. 
+    Takes in the list generated with the previous function and a file format, then plots the result and saves the figure in a file. The file format is passed as a string and can be png, pdf or svg.
+    
     """
     df = pd.DataFrame({'counts':counted})
     df['position']=range(1,len(df['counts'])+1)
-    df.plot(kind='scatter',x='position',y='counts',color='blue')
+    df.plot(kind='scatter',x='position',y='counts',color='blue',s = 0.5)
+    plt.axhline(y=0.5,color='red',linestyle="--",linewidth=0.7,alpha=0.6)
     plt.xlabel('Alignment position')
     plt.ylabel('Number of gaps or Ns')
     plt.tight_layout()
-    plt.savefig('counts_plot.pdf')
+    if image_format=="png":
+        plt.savefig('counts_plot.png')
+    elif image_format=="pdf":
+        plt.savefig('counts_plot.pdf')
+    elif image_format=="svg":
+        plt.savefig('counts_plot.svg')
