@@ -26,3 +26,14 @@ def save_as_df(counted,file_name):
     df['position']=range(1,len(df['counts'])+1)
     df.to_csv(file_name,sep="\t",index=False)
     
+  def plot_Ngap_counts(counted):
+    """
+    Takes in the list generated with the previous function, plots the result and saves the figure in a pdf file. 
+    """
+    df = pd.DataFrame({'counts':counted})
+    df['position']=range(1,len(df['counts'])+1)
+    df.plot(kind='scatter',x='position',y='counts',color='blue')
+    plt.xlabel('Alignment position')
+    plt.ylabel('Number of gaps or Ns')
+    plt.tight_layout()
+    plt.savefig('counts_plot.pdf')
