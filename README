@@ -1,1 +1,1 @@
-The file contains two simple python functions: the first (Ngap_position_count) to count the number of gaps or Ns in every position of a multiple sequence alignment in fasta format and the second (save_as_df) to save the result as a data frame in a tsv file. 
+The file contains three simple python functions: the first (Ngap_position_count) to count the number of gaps or Ns in every position of a multiple sequence alignment in fasta format, the second (save_as_df) to save the result as a data frame in a tsv file and the third (plot_Ngap_counts) to plot the results. 
