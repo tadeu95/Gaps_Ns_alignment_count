@@ -6,6 +6,7 @@ Created on Tue May 26 20:47:47 2020
 """
 from Bio import SeqIO
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def Ngap_position_count(alignment_fasta_file):
     """
