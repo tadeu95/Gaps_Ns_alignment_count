@@ -30,7 +30,6 @@ def save_as_df(counted,file_name):
 def plot_Ngap_counts(counted,image_format):
     """
     Takes in the list generated with the previous function and a file format, then plots the result and saves the figure in a file. The file format is passed as a string and can be png, pdf or svg.
-    
     """
     df = pd.DataFrame({'counts':counted})
     df['position']=range(1,len(df['counts'])+1)
