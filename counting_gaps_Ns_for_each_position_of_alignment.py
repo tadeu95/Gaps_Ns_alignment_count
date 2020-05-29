@@ -45,3 +45,13 @@ def plot_Ngap_counts(counted,image_format):
         plt.savefig('counts_plot.pdf')
     elif image_format=="svg":
         plt.savefig('counts_plot.svg')
+        
+def cut_alignment(fasta_file,beginning,end):
+    """
+    Takes in a fasta formatted multiple sequence aligment, a beginning and an end position, then cuts each sequence in the alignment by those positions. Returns a new trimmed fasta file. 
+    The first position of the alignment is given by the number 1 in this function.
+    """
+    records = list(SeqIO.parse(fasta_file, "fasta"))
+    for record in records:
+        record.seq=record.seq[beginning-1:end]
+    SeqIO.write(records, "trimmed_alignment.fasta", "fasta") 
