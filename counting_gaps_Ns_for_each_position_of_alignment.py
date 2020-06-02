@@ -54,3 +54,32 @@ def cut_alignment(fasta_file,beginning,end):
     for record in records:
         record.seq=record.seq[beginning-1:end]
     SeqIO.write(records, "trimmed_alignment.fasta", "fasta") 
+   
+def first_last_alignment_positions(fasta_file_name,output_file_name):
+    '''
+    Takes in a multiple sequence alignment in fasta format and the name of the output file and returns a tsv file with three columns: the names of the records in the alignment, the position of the first base pair for that record's sequence and the position of the last base pair for that record's sequence.
+    '''
+    records = list(SeqIO.parse(fasta_file_name, "fasta"))
+    names=[]
+    for record in records:
+        names.append(record.id)
+    sequences=[]
+    for record in records:
+        sequences.append(record.seq)
+    new_list = [str(e) for e in sequences ]
+    def find_i(word):
+        first = None
+        last = None
+        for i, letter in enumerate(word):
+            if first == None:
+                if letter != '-':
+                    first = i       
+            else:
+                if letter != '-':
+                        last = i
+        return (first, last)
+    r = list(map(find_i, new_list))
+    first_positions = [i[0]+1 for i in r]
+    last_positions = [i[1]+1 for i in r]
+    df=pd.DataFrame({'name':names,'first_bp':first_positions,'last_bp':last_positions})
+    df.to_csv(output_file_name,sep="\t",index=False)
