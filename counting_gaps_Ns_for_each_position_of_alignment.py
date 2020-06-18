@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 def Ngap_position_count(alignment_fasta_file):
     """
-    Takes in a fasta file containing the result of a multiple sequence alignment, and proceeds to count the number of Ns or gaps for each position of the alignment.
+    Takes in a fasta file containing the result of a multiple sequence alignment, and proceeds to count the number of Ns or gaps for each position of the alignment. Saves the result as a list.
     """
     records = list(SeqIO.parse(alignment_fasta_file, "fasta"))
     list_seqs=[]
@@ -29,7 +29,7 @@ def save_as_df(counted,file_name):
     
 def plot_Ngap_counts(counted,image_format):
     """
-    Takes in the list generated with the previous function and a file format, then plots the result and saves the figure in a file. The file format is passed as a string and can be png, pdf or svg.
+    Takes in the list generated Ngap_position_count function and a file format, then plots the result and saves the figure in a file. The file format is passed as a string and can be png, pdf or svg.
     """
     df = pd.DataFrame({'counts':counted})
     df['position']=range(1,len(df['counts'])+1)
@@ -48,7 +48,7 @@ def plot_Ngap_counts(counted,image_format):
 def cut_alignment(fasta_file,beginning,end):
     """
     Takes in a fasta formatted multiple sequence aligment, a beginning and an end position, then cuts each sequence in the alignment by those positions. Returns a new trimmed fasta file. 
-    The first position of the alignment is given by the number 1 in this function.
+    The first position of the alignment is given by 1 (and not the standard python 0) in this function.
     """
     records = list(SeqIO.parse(fasta_file, "fasta"))
     for record in records:
